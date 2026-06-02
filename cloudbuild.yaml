@@ -1,0 +1,35 @@
+substitutions:
+  _REGION: southamerica-east1
+  _SERVICE: nev-projeto
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - southamerica-east1-docker.pkg.dev/$PROJECT_ID/nev-projeto/nev-projeto:$COMMIT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - southamerica-east1-docker.pkg.dev/$PROJECT_ID/nev-projeto/nev-projeto:$COMMIT_SHA
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image
+      - southamerica-east1-docker.pkg.dev/$PROJECT_ID/nev-projeto/nev-projeto:$COMMIT_SHA
+      - --region
+      - ${_REGION}
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --port
+      - "8080"
+
+images:
+  - southamerica-east1-docker.pkg.dev/$PROJECT_ID/nev-projeto/nev-projeto:$COMMIT_SHA
