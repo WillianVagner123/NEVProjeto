@@ -4,22 +4,23 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProgressBar } from "@/components/ProgressBar";
-import { site } from "@/data/site";
 
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-cormorant", display: "swap" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap" });
 
+const description = "NEV e o ecossistema de Nutricao do Estilo de Vida que organiza pesquisa, formacao academica, biblioteca cientifica, eventos e proposicoes NutEV em construcao.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"),
   title: {
-    default: "LANEV UnB | Nutrição do Estilo de Vida",
-    template: "%s | LANEV UnB",
+    default: "NEV | Nutricao do Estilo de Vida",
+    template: "%s | NEV",
   },
-  description: site.description,
-  keywords: ["Nutrição do Estilo de Vida", "LANEV", "UnB", "NutEV", "NEV", "GLP-1", "obesidade", "Medicina do Estilo de Vida", "CNPq"],
+  description,
+  keywords: ["Nutrição do Estilo de Vida", "NEV", "NutEV", "LANEV", "UnB", "GLP-1", "obesidade", "Medicina do Estilo de Vida", "CNPq"],
   openGraph: {
-    title: "LANEV UnB | Nutrição do Estilo de Vida",
-    description: site.description,
+    title: "NEV | Nutricao do Estilo de Vida",
+    description,
     type: "website",
     images: ["/brand/nev-brand-board.png"],
   },
