@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_.8fr_.8fr]">
           <div>
             <div className="font-display text-5xl font-semibold">NEV</div>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-sand/72">Nutricao do Estilo de Vida · ecossistema para pesquisa, formacao, debate, eventos e construcao cientifica das proposicoes NutEV. A LANEV e o Grupo de Pesquisa sao frentes dentro desse ecossistema.</p>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-sand/72">Nutricao do Estilo de Vida · ecossistema para pesquisa, formacao, debate, eventos e construcao cientifica das proposicoes NutEV.</p>
             <p className="mt-6 rounded-3xl border border-sand/15 bg-white/5 p-4 text-xs leading-6 text-sand/70">Conteudo educacional e cientifico. Nao substitui avaliacao, diagnostico ou tratamento individualizado por profissional de saude. O uso de nomes institucionais deve ser revisado e aprovado pelas instancias competentes antes de publicacao oficial. Pesquisas com seres humanos dependem das aprovacoes eticas cabiveis.</p>
           </div>
           <div>
