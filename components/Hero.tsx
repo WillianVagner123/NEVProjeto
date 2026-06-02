@@ -7,8 +7,8 @@ import { MetricCounter } from "./MetricCounter";
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-radial-premium noise">
-      <div className="absolute inset-0 bg-grid-premium bg-[length:48px_48px] opacity-45 dark:opacity-20" />
-      <div className="premium-container relative grid min-h-[calc(100svh-64px)] items-center gap-10 py-10 sm:min-h-[calc(100vh-80px)] sm:py-16 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
+      <div className="absolute inset-0 bg-grid-premium bg-[length:48px_48px] opacity-35 dark:opacity-15" />
+      <div className="premium-container relative grid min-h-[calc(100svh-64px)] items-center gap-10 py-10 sm:min-h-[calc(100vh-80px)] sm:py-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-14">
         <Reveal>
           <div className="relative z-10">
             <div className="eyebrow">NEV · Nutricao do Estilo de Vida</div>
@@ -26,15 +26,16 @@ export function Hero() {
           </div>
         </Reveal>
         <Reveal className="lg:justify-self-end">
-          <div className="relative mx-auto aspect-square w-full max-w-[420px] sm:max-w-[560px]">
-            <div className="orbit-ring" />
-            <div className="absolute inset-[8%] rounded-full border border-petroleum/10 bg-white/55 shadow-premium backdrop-blur-xl dark:border-white/10 dark:bg-white/5" />
-            <div className="absolute inset-[18%] animate-float overflow-hidden rounded-full border border-gold/30 bg-petroleum shadow-premium">
-              <Image src="/brand/nev-symbol.png" alt="Circulo da Vida NEV" fill className="object-cover" priority />
+          <div className="relative mx-auto w-full max-w-[520px] rounded-[2.5rem] border border-petroleum/10 bg-white/65 p-5 shadow-premium backdrop-blur-xl dark:border-white/10 dark:bg-white/5 sm:p-8">
+            <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-sage/20 blur-2xl" />
+            <div className="absolute -bottom-8 -left-8 h-24 w-24 rounded-full bg-gold/20 blur-2xl" />
+            <div className="relative mx-auto aspect-square w-full max-w-[380px] rounded-full border border-gold/30 bg-petroleum p-4 shadow-soft sm:max-w-[430px]">
+              <div className="absolute inset-4 rounded-full border border-sand/35" />
+              <Image src="/brand/nev-symbol.png" alt="Circulo da Vida NEV" fill className="rounded-full object-contain p-5" priority />
             </div>
-            <div className="absolute bottom-2 left-1/2 w-[88%] -translate-x-1/2 rounded-[1.5rem] border border-white/60 bg-white/85 p-4 shadow-soft backdrop-blur sm:bottom-5 sm:left-0 sm:w-auto sm:max-w-xs sm:translate-x-0 sm:rounded-[2rem] sm:p-5 dark:border-white/10 dark:bg-[#0f1f25]/80">
+            <div className="relative mt-6 rounded-[1.75rem] border border-petroleum/10 bg-white/85 p-5 shadow-soft dark:border-white/10 dark:bg-[#0f1f25]/80">
               <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold sm:text-xs">Lifestyle Nutrition Framework</div>
-              <p className="mt-2 text-xs leading-5 text-petroleum sm:text-sm sm:leading-6 dark:text-sand">Ciencia, comportamento e alimentacao para saude, desempenho e longevidade saudavel.</p>
+              <p className="mt-2 text-sm leading-6 text-petroleum dark:text-sand">Ciencia, comportamento e alimentacao para saude, desempenho e longevidade saudavel.</p>
             </div>
           </div>
         </Reveal>
