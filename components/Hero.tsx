@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { metrics, site } from "@/data/site";
+import { metrics } from "@/data/site";
 import { Reveal } from "./Reveal";
 import { MetricCounter } from "./MetricCounter";
 
@@ -15,7 +15,7 @@ export function Hero() {
             <h1 className="display-title mt-6 max-w-4xl">
               Um ecossistema cientifico para construir a Nutricao do Estilo de Vida.
             </h1>
-            <p className="body-lg mt-6 max-w-2xl">{site.description}</p>
+            <p className="body-lg mt-6 max-w-2xl">Pesquisa, formacao, biblioteca cientifica, eventos e proposicoes NutEV em desenvolvimento, sempre com linguagem responsavel e sem apresentar ferramentas como se ja estivessem finalizadas.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/framework-nutev" className="btn-primary">Abrir laboratorio NutEV</Link>
               <Link href="/grupo-de-pesquisa" className="btn-secondary">Ver grupo de pesquisa</Link>
@@ -33,8 +33,8 @@ export function Hero() {
               <Image src="/brand/nev-symbol.png" alt="Circulo da Vida NEV" fill className="object-cover" priority />
             </div>
             <div className="absolute bottom-2 left-1/2 w-[88%] -translate-x-1/2 rounded-[1.5rem] border border-white/60 bg-white/85 p-4 shadow-soft backdrop-blur sm:bottom-5 sm:left-0 sm:w-auto sm:max-w-xs sm:translate-x-0 sm:rounded-[2rem] sm:p-5 dark:border-white/10 dark:bg-[#0f1f25]/80">
-              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold sm:text-xs">Lifestyle Nutrition · proposicao cientifica</div>
-              <p className="mt-2 text-xs leading-5 text-petroleum sm:text-sm sm:leading-6 dark:text-sand">LANEV e Grupo de Pesquisa sao frentes dentro do ecossistema NEV.</p>
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold sm:text-xs">Lifestyle Nutrition Framework</div>
+              <p className="mt-2 text-xs leading-5 text-petroleum sm:text-sm sm:leading-6 dark:text-sand">Ciencia, comportamento e alimentacao para saude, desempenho e longevidade saudavel.</p>
             </div>
           </div>
         </Reveal>
