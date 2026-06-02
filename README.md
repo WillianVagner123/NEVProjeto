@@ -1,35 +1,45 @@
-# LANEV UnB Platform 11/10 - Proposições NutEV
+# NEV Projeto - MVP
 
-Site institucional premium para a **Liga Acadêmica de Nutrição do Estilo de Vida — LANEV UnB** e para a construção científica das proposições **NutEV/NEV**.
+Site MVP do **NEV - Nutricao do Estilo de Vida**, um ecossistema para organizar pesquisa, formacao, eventos, biblioteca cientifica e proposicoes NutEV em desenvolvimento.
 
-A proposta evolui a landing page inicial para uma plataforma com páginas internas, interações e arquitetura preparada para crescimento acadêmico e institucional, deixando claro que diretrizes, protocolo, pirâmide e índice são proposições em construção, não ferramentas oficiais prontas.
+URL atual do MVP:
 
-## O que esta versão entrega
+```txt
+https://nev-projeto-760280164025.southamerica-east1.run.app/
+```
+
+Repositorio:
+
+```txt
+https://github.com/WillianVagner123/NEVProjeto
+```
+
+## Visao do projeto
+
+O NEV e a marca/ecossistema principal. Dentro dele existem frentes como:
+
+- Grupo de Pesquisa em Nutricao do Estilo de Vida;
+- LANEV, como frente academica;
+- Laboratorio NutEV, para discutir proposicoes cientificas;
+- Biblioteca cientifica;
+- Eventos;
+- Equipe;
+- Contato e parcerias.
+
+O site nao apresenta piramide, protocolo, indice ou diretrizes como produtos finalizados. Esses elementos aparecem como proposicoes em construcao, abertas a debate, revisao e validacao.
+
+## Stack
 
 - Next.js com App Router
 - TypeScript
 - Tailwind CSS
-- Identidade visual NEV/NutEV aplicada
-- Dark mode premium
-- Busca global com atalho `Ctrl/⌘ + K`
-- Progresso de rolagem
-- Hero institucional premium
-- Círculo da Vida interativo
-- Explorer das proposições NutEV com perguntas orientadoras, limites e próximos passos
-- Página do Grupo de Pesquisa
-- Página da Liga Acadêmica
-- Biblioteca científica com filtros
-- Agenda de eventos
-- Perfis de equipe filtráveis
-- Roadmap científico da construção e validação
-- Diagnóstico rápido de interesse
-- Formulário local com exportação CSV
-- Página LGPD inicial
-- SEO, sitemap e robots
-- Dockerfile para Cloud Run
-- Workflow para GitHub Pages via export estático
+- React
+- Docker
+- Cloud Run
+- Cloud Build
+- Artifact Registry
 
-## Estrutura
+## Estrutura principal
 
 ```txt
 app/
@@ -47,16 +57,17 @@ components/
   Hero.tsx
   CircleOfLife.tsx
   FrameworkExplorer.tsx
-  LibraryHub.tsx
-  TeamGrid.tsx
+  ResearchLines.tsx
   LeadForm.tsx
-  ...
+  Footer.tsx
 data/
   site.ts
 public/brand/
   nev-logo-horizontal.png
   nev-symbol.png
   nev-brand-board.png
+cloudbuild.yaml
+Dockerfile
 ```
 
 ## Rodar localmente
@@ -68,129 +79,151 @@ npm run dev
 
 Abra:
 
-```bash
+```txt
 http://localhost:3000
 ```
 
-## Build de produção
+## Build de producao
 
 ```bash
 npm run build
 npm start
 ```
 
-## Publicar no GitHub Pages
+## Deploy manual no Cloud Run
 
-Esta versão permite exportação estática.
+Projeto Google Cloud:
 
-```bash
-npm run build:export
+```txt
+avance-portal-prod-br
 ```
 
-A pasta gerada será:
+Servico:
 
-```bash
-out/
+```txt
+nev-projeto
 ```
 
-O workflow `.github/workflows/pages.yml` já automatiza isso.
+Regiao:
 
-Passos:
-
-1. Crie um repositório no GitHub.
-2. Envie este projeto.
-3. Vá em `Settings > Pages`.
-4. Configure `GitHub Actions` como source.
-5. Faça push na branch `main`.
-
-## Publicar no Cloud Run
-
-1. Crie um projeto no Google Cloud.
-2. Ative Cloud Run e Cloud Build.
-3. Configure o projeto local:
-
-```bash
-gcloud config set project PROJECT_ID
+```txt
+southamerica-east1
 ```
 
-4. Build e deploy:
+Comandos:
 
 ```bash
-gcloud builds submit --tag gcr.io/PROJECT_ID/lanev-unb-platform
-gcloud run deploy lanev-unb-platform \
-  --image gcr.io/PROJECT_ID/lanev-unb-platform \
-  --platform managed \
+gcloud config set project avance-portal-prod-br
+
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+
+gcloud run deploy nev-projeto \
+  --source . \
   --region southamerica-east1 \
   --allow-unauthenticated
 ```
 
-## Domínio
+## Deploy automatico via Cloud Build
 
-Após deploy, configure domínio customizado usando:
+O repositorio contem o arquivo:
 
-- Cloud Run domain mapping; ou
-- Load Balancer + Cloud Run + Cloud DNS; ou
-- Cloudflare como DNS/CDN.
+```txt
+cloudbuild.yaml
+```
 
-## Formulário
+Ele faz:
 
-O formulário atual é demonstrativo. Ele salva dados no `localStorage` do navegador e exporta CSV.
+1. build da imagem Docker;
+2. push para Artifact Registry;
+3. deploy no Cloud Run;
+4. publicacao na porta 8080.
 
-Para produção, conectar com:
+Guia completo:
 
-- Google Forms
-- Google Sheets via Apps Script
-- Airtable
-- Supabase
-- Formspree
-- HubSpot
-- Brevo
-- API própria em Cloud Run
+```txt
+docs/cloud-run-trigger.md
+```
 
-## Revisões antes de publicar oficialmente
+Resumo para ativar:
 
-- Confirmar autorização de uso do nome UnB.
-- Validar uso de logotipo, marca institucional e nome da Liga.
-- Revisar dados do DGP/CNPq.
-- Inserir e-mail oficial.
-- Inserir links de Lattes, ORCID e redes sociais.
-- Revisar política de privacidade/LGPD.
-- Substituir placeholders por fotos reais e documentos oficiais.
-- Validar texto final com orientador/coordenadores.
+1. Abrir Google Cloud Console.
+2. Ir em Cloud Build > Triggers.
+3. Criar trigger conectado ao GitHub.
+4. Selecionar repositorio `WillianVagner123/NEVProjeto`.
+5. Evento: push na branch `main`.
+6. Arquivo de configuracao: `cloudbuild.yaml`.
+7. Salvar.
+
+Depois disso, cada `git push` na branch `main` atualiza o Cloud Run automaticamente.
+
+## Criar Artifact Registry
+
+```bash
+gcloud artifacts repositories create nev-projeto \
+  --repository-format=docker \
+  --location=southamerica-east1 \
+  --description="Imagens Docker do site NEV"
+```
+
+Se o repositorio ja existir, ignore o erro.
+
+## Permissoes para o Cloud Build
+
+```bash
+PROJECT_NUMBER=$(gcloud projects describe avance-portal-prod-br --format='value(projectNumber)')
+
+gcloud projects add-iam-policy-binding avance-portal-prod-br \
+  --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role="roles/run.admin"
+
+gcloud projects add-iam-policy-binding avance-portal-prod-br \
+  --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role="roles/artifactregistry.writer"
+
+gcloud iam service-accounts add-iam-policy-binding \
+  ${PROJECT_NUMBER}-compute@developer.gserviceaccount.com \
+  --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser" \
+  --project=avance-portal-prod-br
+```
+
+## Formulario
+
+O formulario de contato envia mensagens por FormSubmit para:
+
+```txt
+wvagners@gmail.com
+```
+
+No primeiro envio, o FormSubmit pode solicitar confirmacao por e-mail. Depois da confirmacao, os envios passam normalmente.
 
 ## Identidade visual
 
 Cores:
 
-- Azul petróleo: `#1F4E5F`
-- Verde sálvia: `#8DA58B`
+- Azul petroleo: `#1F4E5F`
+- Verde salvia: `#8DA58B`
 - Bege areia: `#F4F0E6`
 - Grafite: `#2D2D2D`
 - Dourado fosco: `#B89B5E`
 
 Fontes:
 
-- Cormorant Garamond para títulos
+- Cormorant Garamond para titulos
 - Montserrat para interface e textos
 
-## Conteúdo base incorporado
+## Cuidados institucionais
 
-- Grupo de Pesquisa em Nutrição do Estilo de Vida
-- Repercussões dos trabalhos do grupo
-- Linhas de pesquisa
-- Nutrição do Estilo de Vida
-- Nutrição em agonistas do receptor de GLP-1
-- Pesquisadores e estudante listados no conteúdo enviado
-- Laboratório NutEV/NEV
-- Liga Acadêmica de Nutrição do Estilo de Vida
+Antes de divulgar oficialmente em canais institucionais, revisar:
 
+- autorizacao de uso do nome UnB;
+- dados do DGP/CNPq;
+- textos sobre GLP-1;
+- politica de privacidade/LGPD;
+- e-mail oficial de contato;
+- links de Lattes, ORCID e redes sociais;
+- aprovacao por coordenadores/orientadores.
 
+## Conteudo sensivel
 
-## Observações antes da publicação
-
-- Revisar autorização institucional para uso do nome UnB e canais oficiais.
-- Substituir `contato@seudominio.com.br` pelo e-mail oficial.
-- Definir `NEXT_PUBLIC_SITE_URL` com o domínio real.
-- O formulário está em modo demonstração/local; conectar a uma solução real antes de captar dados.
-- Conteúdos sobre GLP-1 têm finalidade educacional e não substituem orientação médica/nutricional.
-- Pesquisas com seres humanos devem observar as aprovações éticas e institucionais cabíveis.
+Conteudos sobre GLP-1, obesidade, cirurgia bariatrica e intervencoes dietoterapicas tem finalidade educacional e cientifica. O site nao substitui avaliacao, diagnostico, prescricao ou tratamento individualizado por profissional habilitado.
